@@ -24,7 +24,6 @@ public class PlayerControllerScript : MonoBehaviour {
 
         if (Input.GetKey(KeyCode.W) && cam_offset < 5.1f)
         {
-            Debug.Log("W is pressed, cam_offset is " + cam_offset);
             cam_offset += 0.3f;
             if (cam_offset > 5.0f)
             {
@@ -33,7 +32,6 @@ public class PlayerControllerScript : MonoBehaviour {
         }
         else if (cam_offset > 0.0f)
         {
-            Debug.Log("W is not pressed, cam_offset is " + cam_offset);
             cam_offset -= 0.3f;
         }
 
