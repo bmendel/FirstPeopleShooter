@@ -22,17 +22,17 @@ public class PlayerControllerScript : MonoBehaviour {
         transform.Rotate(0, x, 0);
         transform.Translate(0, 0, z);
 
-        if (Input.GetKey(KeyCode.W) && cam_offset < 5.1f)
+        if (Input.GetKey(KeyCode.W) && cam_offset < 8.01f)
         {
-            cam_offset += 0.3f;
-            if (cam_offset > 5.0f)
+            cam_offset += 0.05f;
+            if (cam_offset > 8.0f)
             {
-                cam_offset = 5.0f;
+                cam_offset = 8.0f;
             }
         }
         else if (cam_offset > 0.0f)
         {
-            cam_offset -= 0.3f;
+            cam_offset -= 0.15f;
         }
 
         camera.transform.position = new Vector3(camera.transform.position.x,

@@ -2,28 +2,20 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyMoveScript : MonoBehaviour {
+public class EnemyMoveScript : ActorMoveScript {
 
-    GameObject target;
-    public float aggro_dist;
-    public float move_speed;
-    //public float health, damage;
+    public float health, damage;
 
-    // Use this for initialization
-    void Start()
+    protected override void Start()
     {
-        target = GameObject.FindWithTag("Player");
+        base.Start();
+        base.aggro_dist = 4.0f;
+        base.sleep_dist = 6.0f;
     }
 
-	// Update is called once per frame
-	void Update () {
-        float dist = Vector3.Distance(target.transform.position,
-                                      transform.position);
+    protected override void Update()
+    {
+        base.Update();
+    }
 
-        if (dist < aggro_dist)
-        {
-            transform.LookAt(target.transform);
-            transform.position += transform.forward * move_speed;
-        }
-	}
 }

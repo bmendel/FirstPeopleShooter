@@ -2,23 +2,28 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemySpawnManager : MonoBehaviour {
-
-    public GameObject enemy;
-    public Transform[] spawnpoints;
-    public float spawn_time;
+public class EnemySpawnManager : ActorSpawnManager {
 
     // Use this for initialization
-    void Start () {
-        InvokeRepeating("spawnEnemy", spawn_time, spawn_time);
+    protected override void Start () {
+        spawn_time = 5;
+        spawn_limit = 20;
+        InvokeRepeating("Spawn", spawn_time, spawn_time);
 	}
 
-    void spawnEnemy()
+    protected override void Update()
+    {
+
+    }
+
+    protected override void Spawn()
     {
         foreach (Transform spawn in spawnpoints)
         {
-            Instantiate(enemy, spawn.position, spawn.rotation);
+            if (spawned_actors.Count < spawn_limit)
+            {
+                Instantiate(actor, spawn.position, spawn.rotation);
+            }
         }
-        
     }
 }
