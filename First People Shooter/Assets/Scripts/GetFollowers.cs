@@ -13,20 +13,6 @@ public class GetFollowers : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        GetComponent<Stats>().currentFollowers += newFollowers;
 	}
-
-    private void OnTriggerEnter(Collider collision)
-    {
-        if(collision.tag == "Temple")
-        {
-            newFollowers = Random.Range(1, 10);
-        }
-        else if(collision.tag == "Shrine")
-        {
-            newFollowers = Random.Range(1, 4);
-        }
-        if (newFollowers > 20)
-            newFollowers = 20;
-    }
+    
 }
