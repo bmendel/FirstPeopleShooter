@@ -29,7 +29,6 @@ public class EnemyWaveManager : MonoBehaviour {
         }
 
         enemy_count = GetEnemyCount();
-        Debug.Log(enemy_count);
     }
 
     void StartNextWave()

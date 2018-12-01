@@ -15,15 +15,17 @@ public class PlayerControllerScript : MonoBehaviour {
 	void Start () {
         y_height = camera.transform.position.y;
         cam_offset = 0.0f;
+        throwSpeed = 30.0f;
 	}
 	
 	// Update is called once per frame
 	void Update () {
-        float x = Input.GetAxis("Horizontal") * Time.deltaTime * 5.0f;
+        float x = Input.GetAxis("Horizontal") * Time.deltaTime * 150.0f;
         float z = Input.GetAxis("Vertical") * Time.deltaTime * 5.0f;
         
         
-        transform.Translate(x, 0, z);
+        transform.Translate(0, 0, z);
+        transform.Rotate(0, x, 0);
 
         if (Input.GetKey(KeyCode.W) && cam_offset < 8.01f)
         {
@@ -45,17 +47,14 @@ public class PlayerControllerScript : MonoBehaviour {
         //Throw follower on Left Mouse Click
         if(Input.GetMouseButtonDown(0))
         {
-            Debug.Log("Shoot");
-            float step = throwSpeed * Time.deltaTime;
-            GameObject instBullet = Instantiate(bullet, bulletSpawn.transform.position, transform.rotation);
-            Vector3 target = Input.mousePosition;
-            //target.z = transform.position.z - Camera.main.transform.position.z;
-            target = Camera.main.ScreenToWorldPoint(target);
-            instBullet.transform.position = Vector3.MoveTowards(bulletSpawn.position, target, step);
-
-            Vector3 dir = this.transform.position - target;
-            float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
-            transform.rotation = Quaternion.AngleAxis(angle, Vector3.up);
+            Shoot();
         }
+    }
+
+    void Shoot()
+    {
+        GameObject projectile = Instantiate(bullet, bulletSpawn.position, bulletSpawn.rotation);
+        projectile.GetComponent<Rigidbody>().velocity = projectile.transform.forward * throwSpeed;
+        Destroy(projectile, 2.0f);
     }
 }
