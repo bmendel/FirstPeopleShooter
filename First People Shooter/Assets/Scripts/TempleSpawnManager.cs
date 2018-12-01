@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class TempleSpawnManager : ActorSpawnManager {
 
-    public int capacity;
-    int prev_stock = 0, prev_size = 0;
+    public float allegiance;
+    public int capacity;  
     public GameObject[] waiting_actors;
 
     // Use this for initialization
@@ -21,10 +21,9 @@ public class TempleSpawnManager : ActorSpawnManager {
     protected override void Update()
     {
         // Check to see if waiting followers have moved from their spawned position
-        for (int i = 0; i < waiting_actors.Length - 1; ++i) {
+        for (int i = 0; i < waiting_actors.Length; ++i) {
             if (waiting_actors[i] && waiting_actors[i].GetComponent<FollowerMoveScript>().aggrod)
             {
-                Debug.Log("Actor released at index" + i);
                 waiting_actors[i] = null;
             }
         }

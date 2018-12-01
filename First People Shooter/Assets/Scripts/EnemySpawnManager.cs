@@ -4,12 +4,16 @@ using UnityEngine;
 
 public class EnemySpawnManager : ActorSpawnManager {
 
+    bool allow_spawning;
+
     // Use this for initialization
-    protected override void Start () {
+    protected override void Start ()
+    {
         spawn_time = 5;
         spawn_limit = 20;
-        InvokeRepeating("Spawn", spawn_time, spawn_time);
-	}
+        allow_spawning = false;
+        InvokeRepeating("Spawn", 1.0f, spawn_time);
+    }
 
     protected override void Update()
     {
@@ -20,10 +24,30 @@ public class EnemySpawnManager : ActorSpawnManager {
     {
         foreach (Transform spawn in spawnpoints)
         {
-            if (spawned_actors.Count < spawn_limit)
+            if (allow_spawning && spawned_actors.Count < spawn_limit)
             {
-                Instantiate(actor, spawn.position, spawn.rotation);
+                spawned_actors.Add(Instantiate(actor, spawn.position, spawn.rotation));
             }
         }
+    }
+
+    public void enableSpawns()
+    {
+        allow_spawning = true;
+    }
+
+    public void disableSpawns()
+    {
+        allow_spawning = false;
+    }
+
+    public void setSpawnLimit(int limit)
+    {
+        spawn_limit = limit;
+    }
+
+    public int getSpawnCount()
+    {
+        return spawned_actors.Count;
     }
 }

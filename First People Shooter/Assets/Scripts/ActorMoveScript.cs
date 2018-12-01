@@ -27,7 +27,8 @@ public class ActorMoveScript : MonoBehaviour {
         {
             aggrod = true;
             transform.LookAt(target.transform);
-            transform.position += transform.forward * move_speed;
+            Vector3 forward = transform.forward;
+            transform.position += new Vector3(forward.x, 0, forward.z) * move_speed;
         }
 
         if (dist > sleep_dist && aggrod)
