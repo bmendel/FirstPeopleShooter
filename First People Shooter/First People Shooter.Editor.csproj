@@ -300,13 +300,13 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="First People Shooter.csproj">
-      <Project>{787ADD7D-2A56-CB42-2C9A-955891E6D83D}</Project>
-      <Name>First People Shooter</Name>
-    </ProjectReference>
     <ProjectReference Include="First People Shooter.Plugins.csproj">
       <Project>{4C51EA21-6F1C-C367-4EE2-92C77CF688F5}</Project>
       <Name>First People Shooter.Plugins</Name>
+    </ProjectReference>
+    <ProjectReference Include="First People Shooter.csproj">
+      <Project>{787ADD7D-2A56-CB42-2C9A-955891E6D83D}</Project>
+      <Name>First People Shooter</Name>
     </ProjectReference>
     <ProjectReference Include="First People Shooter.Editor.Plugins.csproj">
       <Project>{0B607FB8-8E40-7509-CAD8-612BF0723DC1}</Project>
