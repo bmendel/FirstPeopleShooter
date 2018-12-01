@@ -318,7 +318,6 @@
     <Compile Include="Assets\Scripts\EnemySpawnManager.cs" />
     <Compile Include="Assets\Scripts\EnemyWaveManager.cs" />
     <Compile Include="Assets\Scripts\FollowerMoveScript.cs" />
-    <Compile Include="Assets\Scripts\GetFollowers.cs" />
     <Compile Include="Assets\Scripts\PlayerControllerScript.cs" />
     <Compile Include="Assets\Scripts\ShrineSpawnManager.cs" />
     <Compile Include="Assets\Scripts\Stats.cs" />
