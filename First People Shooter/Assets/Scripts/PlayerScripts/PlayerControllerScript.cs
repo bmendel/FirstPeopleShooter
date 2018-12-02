@@ -25,15 +25,7 @@ public class PlayerControllerScript : MonoBehaviour {
         z = Input.GetAxis("Vertical") * Time.deltaTime * 5.0f;
 
 
-        if (!colliding)
-        {
-            transform.Translate(0, 0, z);
-        }
-        else
-        {
-            transform.Translate(0, 0, -z);
-            colliding = false;
-        }
+        transform.Translate(0, 0, z);
         transform.Rotate(0, x, 0);
 
         if (Input.GetKey(KeyCode.W) && cam_offset < 8.01f)

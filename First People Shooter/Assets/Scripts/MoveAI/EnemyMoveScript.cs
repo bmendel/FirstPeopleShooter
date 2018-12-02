@@ -20,29 +20,34 @@ public class EnemyMoveScript : ActorMoveScript {
         float dist = Vector3.Distance(target.transform.position,
                                       transform.position);
 
+        
+
         if (!resting)
         {
+            // If enemy hits player, player takes damage
+            if (dist < 1.0f)
+            {
+                target.GetComponent<PlayerStats>().playerHealth -= damage;
+                resting = true;
+                Invoke("WakeUp", 1.0f);
+            }
             transform.LookAt(target.transform);
             Vector3 forward = transform.forward;
             transform.position += new Vector3(speed * forward.x, 0, speed * forward.z) * move_speed;
         }
+        // After a hit, the enemy "rests" for a bit (doesn't move)
+        
     }
 
     // Checks for collisions against other actors in the world
     protected void OnCollisionEnter(Collision c)
     {
-        // If enemy hits player, player takes damage
-        if (c.gameObject.tag == "Player")
-        {
-            target.GetComponent<PlayerStats>().playerHealth -= damage;
-            resting = true;
-        }
-
         // If enemy hits a follower, the follower is destroyed
         if (c.gameObject.tag == "Follower")
         {
             c.gameObject.GetComponent<FollowerMoveScript>().destroyFollower();
             resting = true;
+            Invoke("WakeUp", 1.0f);
         }
 
         // If enemy hits a bullet, the enemy is destroyed and the player gets some life
@@ -56,12 +61,7 @@ public class EnemyMoveScript : ActorMoveScript {
             Destroy(c.gameObject);
             Destroy(this.gameObject);
             resting = true;
-        }
-
-        // After a hit, the enemy "rests" for a bit (doesn't move)
-        if (resting)
-        {
-            Invoke("WakeUp", 0.75f);
+            Invoke("WakeUp", 1.0f);
         }
     }
 

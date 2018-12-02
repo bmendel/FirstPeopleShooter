@@ -23,15 +23,6 @@ public class PlayerStats : MonoBehaviour {
 
     }
 
-    void OnCollisionEnter(Collision c)
-    {
-       // if (c.gameObject.tag == "Wall")
-       // {
-            Debug.Log("Colliding with wall");
-            controller.GetComponent<PlayerControllerScript>().colliding = true;
-        //}
-    }
-
     public int getHealth()
     {
         return playerHealth;
