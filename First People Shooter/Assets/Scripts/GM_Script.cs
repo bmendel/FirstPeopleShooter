@@ -5,35 +5,39 @@ using UnityEngine;
 
 public class GM_Script : MonoBehaviour {
 
-    public Canvas PauseScreen;
-    public GameObject Actors;
+    public GameObject PauseScreen;
+    public bool paused;
 
 	// Use this for initialization
 	void Start () {
-        PauseScreen.enabled = false;
+        PauseScreen.SetActive(false);
+        paused = false;
 	}
 	
 	// Update is called once per frame
 	void Update () {
 		if(Input.GetKeyDown(KeyCode.P))
         {
-            EnablePauseScreen();
+            if (!paused)
+                EnablePauseScreen();
+            else if (paused)
+                DisablePauseScreen();
         }
 	}
 
     private void EnablePauseScreen()
     {
-        if(Time.timeScale == 0)
-        {
-            Time.timeScale = 1;
-            Debug.Log(Time.timeScale);
-        }
-        else
-        {
-            Time.timeScale = 0;
-            Debug.Log(Time.timeScale);
-        }
-        PauseScreen.enabled = !PauseScreen.enabled;
-        Debug.Log("Pause game");
+        Time.timeScale = 0;
+        PauseScreen.SetActive(true);
+        paused = true;
+        Debug.Log("Pause game : " + Time.timeScale);
+    }
+
+    private void DisablePauseScreen()
+    {
+        Time.timeScale = 1;
+        PauseScreen.SetActive(false);
+        paused = false;
+        Debug.Log("Unpause game : " + Time.timeScale);
     }
 }
