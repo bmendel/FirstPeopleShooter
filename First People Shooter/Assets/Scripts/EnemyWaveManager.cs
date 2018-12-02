@@ -60,7 +60,7 @@ public class EnemyWaveManager : MonoBehaviour {
     }
 
     // Returns the total number of enemies on the field at that instant
-    int GetEnemyCount()
+    public int GetEnemyCount()
     {
         int count = 0;
         foreach (GameObject spawn in spawns)

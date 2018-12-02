@@ -20,9 +20,19 @@ public class PlayerStats : MonoBehaviour {
 
     }
 
+    public int GetHealth()
+    {
+        return playerHealth;
+    }
+
     public int getFollowerCount()
     {
         return followers.Count;
+    }
+
+    public int GetKillCount()
+    {
+        return kills;
     }
 
     public void addFollower(GameObject follower)

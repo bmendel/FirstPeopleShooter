@@ -46,19 +46,11 @@ public class EnemyMoveScript : ActorMoveScript {
         // If enemy hits a bullet, the enemy is destroyed and the player gets some life
         if (c.gameObject.tag == "Bullet")
         {
-<<<<<<< HEAD
-            if (target.GetComponent<PlayerStats>().playerHealth < 99)
-            {
-                target.GetComponent<PlayerStats>().playerHealth += 2;
-                Debug.Log(target.GetComponent<PlayerStats>().playerHealth);
-            }
-=======
             if (target.GetComponent<PlayerStats>().playerHealth < 100)
             {
                 target.GetComponent<PlayerStats>().playerHealth += 2;
             }
             target.GetComponent<PlayerStats>().kills++;
->>>>>>> a024f1d659c4a25d100dfbcd013869dbfeff8606
             Destroy(c.gameObject);
             Destroy(this.gameObject);
         }
