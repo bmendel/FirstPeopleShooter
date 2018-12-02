@@ -20,6 +20,16 @@ public class TempleSpawnManager : ActorSpawnManager {
 
     protected override void Update()
     {
+        // Check to see if any spawned actors are null (have been destroyed)
+        // and removes them from the list
+        for (int i = 0; i < spawned_actors.Count; ++i)
+        {
+            if (!spawned_actors[i])
+            {
+                spawned_actors.RemoveAt(i);
+            }
+        }
+
         // Check to see if waiting followers have moved from their spawned position
         for (int i = 0; i < waiting_actors.Length; ++i) {
             if (waiting_actors[i] && waiting_actors[i].GetComponent<FollowerMoveScript>().following)
