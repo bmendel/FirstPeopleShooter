@@ -7,6 +7,8 @@ public class PlayerControllerScript : MonoBehaviour {
     public float cam_offset, y_height, x, z;
     public GameObject camera;
     public GameObject bullet;
+    public GameObject sound1;
+    public GameObject sound2;
     public Transform bulletSpawn;
     public float throwSpeed;
     public bool colliding;
@@ -50,6 +52,18 @@ public class PlayerControllerScript : MonoBehaviour {
         if (Input.GetMouseButtonDown(0))
         {
             Shoot();
+            if (GameObject.FindWithTag("Player").GetComponent<PlayerStats>().followers.Count > 0)
+            {
+                sound1.GetComponent<AudioSource>().Stop();
+                sound2.GetComponent<AudioSource>().Stop();
+                sound2.GetComponent<AudioSource>().Play();
+            }
+            else
+            {
+                sound1.GetComponent<AudioSource>().Stop();
+                sound2.GetComponent<AudioSource>().Stop();
+                sound1.GetComponent<AudioSource>().Play();
+            }
         }
     }
 
