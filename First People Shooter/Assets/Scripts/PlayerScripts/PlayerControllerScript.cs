@@ -9,20 +9,28 @@ public class PlayerControllerScript : MonoBehaviour {
     public GameObject bullet;
     public GameObject sound1;
     public GameObject sound2;
-    public Transform bulletSpawn;
+    public Transform bulletSpawnLeft, bulletSpawnRight;
     public float throwSpeed;
-    public bool colliding;
+    public bool paused;
 
 	// Use this for initialization
 	void Start () {
         y_height = camera.transform.position.y;
         cam_offset = 0.0f;
         throwSpeed = 20.0f;
-        colliding = false;
+        paused = false;
 	}
-	
-	// Update is called once per frame
-	void Update () {
+
+    // Update is called once per frame
+    void Update() {
+        if (!paused)
+        {
+            updatePlayerControls();
+        }
+    }
+
+    void updatePlayerControls()
+    {
         x = Input.GetAxis("Horizontal") * Time.deltaTime * 150.0f;
         z = Input.GetAxis("Vertical") * Time.deltaTime * 5.0f;
 
@@ -48,9 +56,16 @@ public class PlayerControllerScript : MonoBehaviour {
                                                 camera.transform.position.z);
 
         //Throw follower on Left Mouse Click
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) || Input.GetMouseButtonDown(1))
         {
-            Shoot();
+            if (Input.GetMouseButtonDown(0))
+            {
+                Shoot("Left");
+            }
+            if (Input.GetMouseButtonDown(1))
+            {
+                Shoot("Right");
+            }
             if (GameObject.FindWithTag("Player").GetComponent<PlayerStats>().followers.Count > 0)
             {
                 sound1.GetComponent<AudioSource>().Stop();
@@ -66,13 +81,29 @@ public class PlayerControllerScript : MonoBehaviour {
         }
     }
 
-    void Shoot()
+    void Shoot(string hand)
     {
         if (GameObject.FindWithTag("Player").GetComponent<PlayerStats>().removeFollower())
         {
-            GameObject projectile = Instantiate(bullet, bulletSpawn.position, bulletSpawn.rotation);
+            GameObject projectile;
+            if (hand == "Left")
+                projectile = Instantiate(bullet, bulletSpawnLeft.position, bulletSpawnLeft.rotation);
+            else
+            {
+                projectile = Instantiate(bullet, bulletSpawnRight.position, bulletSpawnRight.rotation);
+            }
             projectile.GetComponent<Rigidbody>().velocity = projectile.transform.forward * throwSpeed;
             Destroy(projectile, 2.0f);
         }
+    }
+
+    public void Pause()
+    {
+        paused = true;
+    }
+
+    public void Unpause()
+    {
+        paused = false;
     }
 }

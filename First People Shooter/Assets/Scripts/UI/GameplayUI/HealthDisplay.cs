@@ -7,7 +7,7 @@ public class HealthDisplay : MonoBehaviour
 {
 
     public GameObject player;
-    public Text healthText;
+    public Text healthText, gameOverText;
     public int health;
 
     // Use this for initialization
@@ -21,6 +21,11 @@ public class HealthDisplay : MonoBehaviour
     {
         health = player.GetComponent<PlayerStats>().getHealth();
         healthText.text = "Health : " + health;
+
+        if (health <= 0)
+        {
+            gameOverText.text = "GAME OVER";
+        }
 
         /*if (Input.GetKeyDown(KeyCode.Space))
         {

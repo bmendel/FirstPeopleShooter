@@ -5,7 +5,8 @@ using UnityEngine;
 public class EnemyMoveScript : ActorMoveScript {
 
     public bool resting;
-    float speed;
+    public float speed;
+    public int hits, total_hits;
 
     protected override void Start()
     {
@@ -13,6 +14,8 @@ public class EnemyMoveScript : ActorMoveScript {
         health = 20;
         damage = 10;
         speed = 0.8f;
+        hits = 0;
+        total_hits = 3;
     }
 
     protected override void Update()
@@ -46,6 +49,11 @@ public class EnemyMoveScript : ActorMoveScript {
         if (c.gameObject.tag == "Follower")
         {
             c.gameObject.GetComponent<FollowerMoveScript>().destroyFollower();
+            hits++;
+            if (hits >= total_hits)
+            {
+                destroyEnemy();
+            }
             resting = true;
             Invoke("WakeUp", 1.0f);
         }
@@ -53,16 +61,19 @@ public class EnemyMoveScript : ActorMoveScript {
         // If enemy hits a bullet, the enemy is destroyed and the player gets some life
         if (c.gameObject.tag == "Bullet")
         {
-            if (target.GetComponent<PlayerStats>().playerHealth < 100)
-            {
-                target.GetComponent<PlayerStats>().playerHealth += 2;
-            }
-            target.GetComponent<PlayerStats>().addKill();
             Destroy(c.gameObject);
-            Destroy(this.gameObject);
-            resting = true;
-            Invoke("WakeUp", 1.0f);
+            destroyEnemy();
         }
+    }
+
+    void destroyEnemy()
+    {
+        if (target.GetComponent<PlayerStats>().playerHealth < 100)
+        {
+            target.GetComponent<PlayerStats>().playerHealth += 2;
+        }
+        target.GetComponent<PlayerStats>().addKill();
+        Destroy(this.gameObject);
     }
 
     // Called to "wake up" an enemy resting after a collision

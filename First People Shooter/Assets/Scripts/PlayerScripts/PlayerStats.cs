@@ -1,26 +1,37 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerStats : MonoBehaviour {
 
-    public GameObject controller;
     public int kills, waveKills, usedFollowers;
     public int playerHealth;
     public List<GameObject> followers;
+    public bool game_over;
 
     // Use this for initialization
     void Start () {
-        controller = GameObject.FindWithTag("GameController");
         kills = 0;
         waveKills = 0;
         usedFollowers = 0;
         playerHealth = 100;
+        game_over = false;
 	}
 	
 	// Update is called once per frame
 	void Update () {
+        if (playerHealth <= 0 && !game_over)
+        {
+            game_over = true;
+            Invoke("endGame", 5.0f);
+            GetComponent<PlayerControllerScript>().Pause();
+        }
+    }
 
+    public void endGame()
+    {
+        SceneManager.LoadScene("Title", LoadSceneMode.Single);
     }
 
     public int getHealth()
