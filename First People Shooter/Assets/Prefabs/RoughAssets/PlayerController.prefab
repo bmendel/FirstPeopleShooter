@@ -272,10 +272,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb576b1221f3f644ba37b730f00cd098, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cam_offset: 0
+  y_height: 0
+  x: 0
+  z: 0
   camera: {fileID: 1399644525370930}
   bullet: {fileID: 1158445624843246, guid: 227b97e4a5818864b8d0240d9f2b5379, type: 2}
   bulletSpawn: {fileID: 4027947461243004}
   throwSpeed: 0
+  colliding: 0
 --- !u!114 &114617343659947008
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -287,7 +292,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1739c31a06a6c9b44a97412706d5f79b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  controller: {fileID: 0}
   kills: 0
+  waveKills: 0
   usedFollowers: 0
   playerHealth: 0
   followers: []

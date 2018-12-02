@@ -7,6 +7,8 @@ TagManager:
   - Follower
   - Bullet
   - SpawnControl
+  - Enemy
+  - Wall
   layers:
   - Default
   - TransparentFX

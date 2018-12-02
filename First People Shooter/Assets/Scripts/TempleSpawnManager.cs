@@ -11,7 +11,7 @@ public class TempleSpawnManager : ActorSpawnManager {
     // Use this for initialization
     protected override void Start()
     {
-        capacity = 4;
+        capacity = spawnpoints.Length;
         waiting_actors = new GameObject[capacity];
         spawn_time = 10;
         spawn_limit = 20;

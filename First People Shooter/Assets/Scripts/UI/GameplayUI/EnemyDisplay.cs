@@ -21,7 +21,14 @@ public class EnemyDisplay : MonoBehaviour {
         enemiesKilled = player.GetComponent<PlayerStats>().getWaveKillCount();
         enemies = enemyWaveController.GetComponent<EnemyWaveManager>().wave_capacity;
         waveText.text = "Wave: " + enemyWaveController.GetComponent<EnemyWaveManager>().wave_count;
-        enemyText.text = "Enemies Killed: " + enemiesKilled + "/" + enemies;
+        if (enemiesKilled >= enemies)
+        {
+            enemyText.text = "Wave Complete!";
+        }
+        else
+        {
+            enemyText.text = "Enemies Killed: " + enemiesKilled + "/" + enemies;
+        }
 
         /*if(Input.GetKeyDown(KeyCode.R))
         {

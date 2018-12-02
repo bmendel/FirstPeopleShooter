@@ -4,12 +4,14 @@ using UnityEngine;
 
 public class PlayerStats : MonoBehaviour {
 
+    public GameObject controller;
     public int kills, waveKills, usedFollowers;
     public int playerHealth;
     public List<GameObject> followers;
 
     // Use this for initialization
     void Start () {
+        controller = GameObject.FindWithTag("GameController");
         kills = 0;
         waveKills = 0;
         usedFollowers = 0;
@@ -19,6 +21,24 @@ public class PlayerStats : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
+    }
+
+    void OnCollisionEnter(Collision c)
+    {
+        Debug.Log("Colliding with wall");
+        if (c.gameObject.tag == "Wall")
+        {
+            
+            controller.GetComponent<PlayerControllerScript>().colliding = true;
+        }
+    }
+
+    void OnCollisionExit(Collision c)
+    {
+        if (c.gameObject.tag == "Wall")
+        {
+            controller.GetComponent<PlayerControllerScript>().colliding = false;
+        }
     }
 
     public int getHealth()

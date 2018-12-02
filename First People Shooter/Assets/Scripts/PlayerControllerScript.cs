@@ -4,27 +4,29 @@ using UnityEngine;
 
 public class PlayerControllerScript : MonoBehaviour {
 
-    float cam_offset, y_height;
+    public float cam_offset, y_height, x, z;
     public GameObject camera;
     public GameObject bullet;
     public Transform bulletSpawn;
     public float throwSpeed;
-    public bool paused;
+    public bool colliding;
 
 	// Use this for initialization
 	void Start () {
         y_height = camera.transform.position.y;
         cam_offset = 0.0f;
         throwSpeed = 20.0f;
+        colliding = true;
 	}
 	
 	// Update is called once per frame
 	void Update () {
-        float x = Input.GetAxis("Horizontal") * Time.deltaTime * 150.0f;
-        float z = Input.GetAxis("Vertical") * Time.deltaTime * 5.0f;
+        x = Input.GetAxis("Horizontal") * Time.deltaTime * 150.0f;
+        z = Input.GetAxis("Vertical") * Time.deltaTime * 5.0f;
         
         
-        transform.Translate(0, 0, z);
+        if (colliding)
+            transform.Translate(0, 0, z);
         transform.Rotate(0, x, 0);
 
         if (Input.GetKey(KeyCode.W) && cam_offset < 8.01f)
@@ -49,18 +51,6 @@ public class PlayerControllerScript : MonoBehaviour {
         {
             Shoot();
         }
-
-        if (Input.GetKeyDown(KeyCode.P))
-        {
-            if (!paused)
-            {
-                PauseGame();
-            }
-            else
-            {
-                ContinueGame();
-            }
-        }
     }
 
     void Shoot()
@@ -71,17 +61,5 @@ public class PlayerControllerScript : MonoBehaviour {
             projectile.GetComponent<Rigidbody>().velocity = projectile.transform.forward * throwSpeed;
             Destroy(projectile, 2.0f);
         }
-    }
-
-    void PauseGame()
-    {
-        paused = true;
-        Time.timeScale = 0;
-    }
-
-    void ContinueGame()
-    {
-        paused = false;
-        Time.timeScale = 1;
     }
 }

@@ -8,7 +8,7 @@ public class ShrineSpawnManager : ActorSpawnManager {
     protected override void Start()
     {
         spawn_time = 5.0f;
-        spawn_limit = 2;
+        spawn_limit = 4;
         Invoke("Spawn", spawn_time);
     }
 
