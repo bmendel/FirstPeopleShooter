@@ -51,7 +51,11 @@ public class EnemyMoveScript : ActorMoveScript {
 
         if (c.gameObject.tag == "Bullet")
         {
-            target.GetComponent<PlayerStats>().playerHealth += 2;
+            if (target.GetComponent<PlayerStats>().playerHealth < 99)
+            {
+                target.GetComponent<PlayerStats>().playerHealth += 2;
+                Debug.Log(target.GetComponent<PlayerStats>().playerHealth);
+            }
             Destroy(c.gameObject);
             Destroy(this.gameObject);
         }
