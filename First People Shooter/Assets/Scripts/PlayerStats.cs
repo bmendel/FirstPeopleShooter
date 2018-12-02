@@ -5,11 +5,10 @@ using UnityEngine;
 public class PlayerStats : MonoBehaviour {
 
     public int Influence;
-    public int currentFollowers;
-    public int usedFollowers;
+    //public int usedFollowers;
     public int playerHealth;
     public int ownedTemples;
-    public List<GameObject> Followers;
+    public List<GameObject> followers;
 
     // Use this for initialization
     void Start () {
@@ -18,18 +17,36 @@ public class PlayerStats : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        Influence = currentFollowers - usedFollowers;
+        Influence = followers.Count;// - usedFollowers;
+    }
+
+    public int getFollowerCount()
+    {
+        return followers.Count;
     }
 
     public void addFollower(GameObject follower)
     {
-        Followers.Add(follower);
-        currentFollowers += 1;
+        followers.Add(follower);
+    }
+
+    public bool removeFollower()
+    {
+        if (followers.Count > 0)
+        {
+            followers[0].GetComponent<FollowerMoveScript>().destroyFollower();
+            return true;
+        }
+        return false;
     }
 
     public void removeFollower(GameObject follower)
     {
-        Followers.Remove(follower);
-        currentFollowers -= 1;
+        followers.Remove(follower);
+    }
+
+    public bool removeTenFollowers()
+    {
+        return false;
     }
 }

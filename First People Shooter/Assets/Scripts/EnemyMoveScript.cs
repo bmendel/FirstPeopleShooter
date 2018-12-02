@@ -4,12 +4,13 @@ using UnityEngine;
 
 public class EnemyMoveScript : ActorMoveScript {
 
-    public bool aggrod;
+    public bool aggrod, resting;
 
     protected override void Start()
     {
         target = GameObject.FindWithTag("Player");
         aggrod = false;
+        resting = false;
         aggro_dist = 4.0f;
         sleep_dist = 6.0f;
         health = 20;
@@ -21,7 +22,7 @@ public class EnemyMoveScript : ActorMoveScript {
         float dist = Vector3.Distance(target.transform.position,
                                       transform.position);
 
-        if (dist < aggro_dist || aggrod)
+        if (!resting && (dist < aggro_dist || aggrod))
         {
             aggrod = true;
             transform.LookAt(target.transform);
@@ -42,6 +43,26 @@ public class EnemyMoveScript : ActorMoveScript {
             target.GetComponent<PlayerStats>().playerHealth -= damage;
             Debug.Log(target.GetComponent<PlayerStats>().playerHealth);
         }
+
+        if (c.gameObject.tag == "Follower")
+        {
+            c.gameObject.GetComponent<FollowerMoveScript>().destroyFollower();
+        }
+
+        if (c.gameObject.tag == "Bullet")
+        {
+            target.GetComponent<PlayerStats>().playerHealth += 2;
+            Destroy(c.gameObject);
+            Destroy(this.gameObject);
+        }
+
+        resting = true;
+        Invoke("WakeUp", 0.75f);
+    }
+
+    void WakeUp()
+    {
+        resting = false;
     }
 
 }

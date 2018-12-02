@@ -314,7 +314,6 @@
     <Compile Include="Assets\ProCore\ProBuilder\API Examples\Vertex Colors\HighlightNearestFace.cs" />
     <Compile Include="Assets\Scripts\ActorMoveScript.cs" />
     <Compile Include="Assets\Scripts\ActorSpawnManager.cs" />
-    <Compile Include="Assets\Scripts\DestroyEnemy.cs" />
     <Compile Include="Assets\Scripts\EnemyMoveScript.cs" />
     <Compile Include="Assets\Scripts\EnemySpawnManager.cs" />
     <Compile Include="Assets\Scripts\EnemyWaveManager.cs" />

@@ -6,7 +6,6 @@ public class PlayerControllerScript : MonoBehaviour {
 
     float cam_offset, y_height;
     public GameObject camera;
-
     public GameObject bullet;
     public Transform bulletSpawn;
     public float throwSpeed;
@@ -53,8 +52,11 @@ public class PlayerControllerScript : MonoBehaviour {
 
     void Shoot()
     {
-        GameObject projectile = Instantiate(bullet, bulletSpawn.position, bulletSpawn.rotation);
-        projectile.GetComponent<Rigidbody>().velocity = projectile.transform.forward * throwSpeed;
-        Destroy(projectile, 2.0f);
+        if (GameObject.FindWithTag("Player").GetComponent<PlayerStats>().removeFollower())
+        {
+            GameObject projectile = Instantiate(bullet, bulletSpawn.position, bulletSpawn.rotation);
+            projectile.GetComponent<Rigidbody>().velocity = projectile.transform.forward * throwSpeed;
+            Destroy(projectile, 2.0f);
+        }
     }
 }

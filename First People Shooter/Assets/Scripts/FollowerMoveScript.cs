@@ -41,4 +41,10 @@ public class FollowerMoveScript : ActorMoveScript {
         }
     }
 
+    public void destroyFollower()
+    {
+        target.GetComponent<PlayerStats>().removeFollower(this.gameObject);
+        Destroy(this.gameObject);
+    }
+
 }

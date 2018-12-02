@@ -24,7 +24,6 @@ GameObject:
   - component: {fileID: 23284181804964968}
   - component: {fileID: 114803329750410366}
   - component: {fileID: 54603226457091622}
-  - component: {fileID: 114823969750348224}
   m_Layer: 0
   m_Name: BasicEnemy
   m_TagString: Untagged
@@ -112,25 +111,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 94ecce5e94f0f8b46b75b59a9cbadcca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  aggrod: 0
+  target: {fileID: 0}
   aggro_dist: 3
   sleep_dist: 6
   move_speed: 0.05
   health: 0
   damage: 0
---- !u!114 &114823969750348224
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1813910909203476}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bb2a74f44fda98f49a31c749704eb309, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  enemy: {fileID: 1813910909203476}
-  bullet: {fileID: 1158445624843246, guid: 227b97e4a5818864b8d0240d9f2b5379, type: 2}
+  aggrod: 0
+  resting: 0
 --- !u!135 &135270725261572672
 SphereCollider:
   m_ObjectHideFlags: 1
