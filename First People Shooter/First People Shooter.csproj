@@ -318,6 +318,7 @@
     <Compile Include="Assets\Scripts\EnemySpawnManager.cs" />
     <Compile Include="Assets\Scripts\EnemyWaveManager.cs" />
     <Compile Include="Assets\Scripts\FollowerMoveScript.cs" />
+    <Compile Include="Assets\Scripts\GM_Script.cs" />
     <Compile Include="Assets\Scripts\PlayerControllerScript.cs" />
     <Compile Include="Assets\Scripts\PlayerStats.cs" />
     <Compile Include="Assets\Scripts\ShrineSpawnManager.cs" />
@@ -326,6 +327,7 @@
     <Compile Include="Assets\Scripts\UI\GameplayUI\FollowersDisplay.cs" />
     <Compile Include="Assets\Scripts\UI\GameplayUI\HealthDisplay.cs" />
     <Compile Include="Assets\Scripts\UI\GameplayUI\ShrinesDisplay.cs" />
+    <Compile Include="Assets\Scripts\UI\PauseUI\Pause.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\ProCore\ProBuilder\API Examples\Icosphere FFT\README.txt" />

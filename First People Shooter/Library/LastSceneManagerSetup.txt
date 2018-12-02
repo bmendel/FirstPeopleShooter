@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/Scenes/Finalizing.unity
+- path: Assets/Scenes/Gonz.unity
   isLoaded: 1
   isActive: 1
