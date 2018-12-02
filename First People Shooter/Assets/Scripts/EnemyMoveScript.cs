@@ -4,17 +4,15 @@ using UnityEngine;
 
 public class EnemyMoveScript : ActorMoveScript {
 
-    public bool aggrod, resting;
+    public bool resting;
+    float speed;
 
     protected override void Start()
     {
         target = GameObject.FindWithTag("Player");
-        aggrod = false;
-        resting = false;
-        aggro_dist = 4.0f;
-        sleep_dist = 6.0f;
         health = 20;
         damage = 10;
+        speed = 0.8f;
     }
 
     protected override void Update()
@@ -22,51 +20,64 @@ public class EnemyMoveScript : ActorMoveScript {
         float dist = Vector3.Distance(target.transform.position,
                                       transform.position);
 
-        if (!resting && (dist < aggro_dist || aggrod))
+        if (!resting)
         {
-            aggrod = true;
             transform.LookAt(target.transform);
             Vector3 forward = transform.forward;
-            transform.position += new Vector3(forward.x, 0, forward.z) * move_speed;
-        }
-
-        if (dist > sleep_dist && aggrod)
-        {
-            aggrod = false;
+            transform.position += new Vector3(speed * forward.x, 0, speed * forward.z) * move_speed;
         }
     }
 
+    // Checks for collisions against other actors in the world
     protected void OnCollisionEnter(Collision c)
     {
+        // If enemy hits player, player takes damage
         if (c.gameObject.tag == "Player")
         {
             target.GetComponent<PlayerStats>().playerHealth -= damage;
-            Debug.Log(target.GetComponent<PlayerStats>().playerHealth);
         }
 
+        // If enemy hits a follower, the follower is destroyed
         if (c.gameObject.tag == "Follower")
         {
             c.gameObject.GetComponent<FollowerMoveScript>().destroyFollower();
         }
 
+        // If enemy hits a bullet, the enemy is destroyed and the player gets some life
         if (c.gameObject.tag == "Bullet")
         {
+<<<<<<< HEAD
             if (target.GetComponent<PlayerStats>().playerHealth < 99)
             {
                 target.GetComponent<PlayerStats>().playerHealth += 2;
                 Debug.Log(target.GetComponent<PlayerStats>().playerHealth);
             }
+=======
+            if (target.GetComponent<PlayerStats>().playerHealth < 100)
+            {
+                target.GetComponent<PlayerStats>().playerHealth += 2;
+            }
+            target.GetComponent<PlayerStats>().kills++;
+>>>>>>> a024f1d659c4a25d100dfbcd013869dbfeff8606
             Destroy(c.gameObject);
             Destroy(this.gameObject);
         }
 
+        // After a hit, the enemy "rests" for a bit (doesn't move)
         resting = true;
         Invoke("WakeUp", 0.75f);
     }
 
+    // Called to "wake up" an enemy resting after a collision
+    // Collisions cause the enemy to move slightly faster
     void WakeUp()
     {
+        speed += 0.1f;
         resting = false;
     }
 
+    public void SetSpeed(float s)
+    {
+        speed = s;
+    }
 }

@@ -14,7 +14,7 @@ public class PlayerControllerScript : MonoBehaviour {
 	void Start () {
         y_height = camera.transform.position.y;
         cam_offset = 0.0f;
-        throwSpeed = 30.0f;
+        throwSpeed = 20.0f;
 	}
 	
 	// Update is called once per frame

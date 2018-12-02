@@ -6,40 +6,50 @@ public class EnemyWaveManager : MonoBehaviour {
 
     public GameObject[] spawns;
     public int wave_count;
-    public int enemy_count, enemy_capacity;
+    public int spawn_capacity, wave_capacity;
     public float time_to_next_wave;
     public bool initiate_next_wave;
 
 	// Use this for initialization
 	void Start () {
-        wave_count = 1;
-        enemy_count = 0;
-        enemy_capacity = 20;
-        SetupWaveSpawns();
-        time_to_next_wave = 2.0f;
-        initiate_next_wave = true;
+        wave_count = 0;
+        spawn_capacity = 4; // number of enemies that can be on the field
+        wave_capacity = 10; // number of enemies total in the wave
+        StartNextWave();
+        time_to_next_wave = 5.0f;
+        initiate_next_wave = false;
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		if (enemy_count < 5 && !initiate_next_wave)
+        // If the total number of enemies in the wave have spawned, 
+        // disable spawning enemies for the rest of the round
+        if (GetSpawnCount() >= wave_capacity)
         {
-            Invoke("StartNextWave", time_to_next_wave);
+            DisableWaveSpawns();
             initiate_next_wave = true;
         }
 
-        enemy_count = GetEnemyCount();
+        // If the enemy count is low, count down to the start of the next wave
+		if (GetEnemyCount() < 5 && initiate_next_wave)
+        {
+            Invoke("StartNextWave", time_to_next_wave);
+            initiate_next_wave = false;
+        }
     }
 
+    // Set up total enemy counts for the next wave
     void StartNextWave()
     {
         wave_count++;
-        enemy_capacity += enemy_capacity / 4;
+        spawn_capacity += 4;
+        wave_capacity += wave_capacity / 3;
+        Debug.Log("Wave " + wave_count + ": spawn capacity=" + spawn_capacity + ", wave_capacity=" + wave_capacity);
         SetupWaveSpawns();
-        initiate_next_wave = false;
     }
 
-    int GetEnemyCount()
+    // Returns the total number of spawns across all enemy spawners in this wave
+    int GetSpawnCount()
     {
         int count = 0;
         foreach (GameObject spawn in spawns)
@@ -49,12 +59,35 @@ public class EnemyWaveManager : MonoBehaviour {
         return count;
     }
 
+    // Returns the total number of enemies on the field at that instant
+    int GetEnemyCount()
+    {
+        int count = 0;
+        foreach (GameObject spawn in spawns)
+        {
+            count += spawn.GetComponent<EnemySpawnManager>().spawned_actors.Count;
+        }
+        return count;
+    }
+
+    // Sets up spawner information for the next wave and enables them
     void SetupWaveSpawns()
     {
         foreach (GameObject spawn in spawns)
         {
-            spawn.GetComponent<EnemySpawnManager>().setSpawnLimit(enemy_capacity / spawns.Length);
+            spawn.GetComponent<EnemySpawnManager>().setSpawnLimit(spawn_capacity / spawns.Length);
+            spawn.GetComponent<EnemySpawnManager>().increaseEnemySpeed();
             spawn.GetComponent<EnemySpawnManager>().enableSpawns();
+        }
+    }
+
+    // Disables spawners
+    void DisableWaveSpawns()
+    {
+        foreach (GameObject spawn in spawns)
+        {
+            spawn.GetComponent<EnemySpawnManager>().disableSpawns();
+            spawn.GetComponent<EnemySpawnManager>().resetSpawnCount();
         }
     }
 }

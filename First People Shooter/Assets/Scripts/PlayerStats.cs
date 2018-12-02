@@ -4,20 +4,20 @@ using UnityEngine;
 
 public class PlayerStats : MonoBehaviour {
 
-    public int Influence;
-    //public int usedFollowers;
+    public int kills, usedFollowers;
     public int playerHealth;
-    public int ownedTemples;
     public List<GameObject> followers;
 
     // Use this for initialization
     void Start () {
+        kills = 0;
+        usedFollowers = 0;
         playerHealth = 100;
 	}
 	
 	// Update is called once per frame
 	void Update () {
-        Influence = followers.Count;// - usedFollowers;
+
     }
 
     public int getFollowerCount()
@@ -35,6 +35,7 @@ public class PlayerStats : MonoBehaviour {
         if (followers.Count > 0)
         {
             followers[0].GetComponent<FollowerMoveScript>().destroyFollower();
+            ++usedFollowers;
             return true;
         }
         return false;
