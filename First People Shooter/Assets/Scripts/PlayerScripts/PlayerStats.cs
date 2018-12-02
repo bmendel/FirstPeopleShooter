@@ -25,20 +25,11 @@ public class PlayerStats : MonoBehaviour {
 
     void OnCollisionEnter(Collision c)
     {
-        Debug.Log("Colliding with wall");
-        if (c.gameObject.tag == "Wall")
-        {
-            
+       // if (c.gameObject.tag == "Wall")
+       // {
+            Debug.Log("Colliding with wall");
             controller.GetComponent<PlayerControllerScript>().colliding = true;
-        }
-    }
-
-    void OnCollisionExit(Collision c)
-    {
-        if (c.gameObject.tag == "Wall")
-        {
-            controller.GetComponent<PlayerControllerScript>().colliding = false;
-        }
+        //}
     }
 
     public int getHealth()
