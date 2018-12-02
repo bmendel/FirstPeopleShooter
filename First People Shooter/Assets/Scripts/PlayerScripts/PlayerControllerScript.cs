@@ -16,17 +16,24 @@ public class PlayerControllerScript : MonoBehaviour {
         y_height = camera.transform.position.y;
         cam_offset = 0.0f;
         throwSpeed = 20.0f;
-        colliding = true;
+        colliding = false;
 	}
 	
 	// Update is called once per frame
 	void Update () {
         x = Input.GetAxis("Horizontal") * Time.deltaTime * 150.0f;
         z = Input.GetAxis("Vertical") * Time.deltaTime * 5.0f;
-        
-        
-        if (colliding)
+
+
+        if (!colliding)
+        {
             transform.Translate(0, 0, z);
+        }
+        else
+        {
+            transform.Translate(0, 0, -z);
+            colliding = false;
+        }
         transform.Rotate(0, x, 0);
 
         if (Input.GetKey(KeyCode.W) && cam_offset < 8.01f)
