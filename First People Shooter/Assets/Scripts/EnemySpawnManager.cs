@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EnemySpawnManager : ActorSpawnManager {
 
-    bool allow_spawning;
+    public bool allow_spawning;
 
     // Use this for initialization
     protected override void Start ()

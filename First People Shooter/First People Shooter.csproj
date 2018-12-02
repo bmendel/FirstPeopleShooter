@@ -319,8 +319,8 @@
     <Compile Include="Assets\Scripts\EnemyWaveManager.cs" />
     <Compile Include="Assets\Scripts\FollowerMoveScript.cs" />
     <Compile Include="Assets\Scripts\PlayerControllerScript.cs" />
+    <Compile Include="Assets\Scripts\PlayerStats.cs" />
     <Compile Include="Assets\Scripts\ShrineSpawnManager.cs" />
-    <Compile Include="Assets\Scripts\Stats.cs" />
     <Compile Include="Assets\Scripts\TempleSpawnManager.cs" />
   </ItemGroup>
   <ItemGroup>

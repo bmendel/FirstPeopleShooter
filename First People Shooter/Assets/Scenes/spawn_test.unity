@@ -113,6 +113,28 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &471703758 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1289624081614116, guid: 01e211d41ecc13c47a80c3371d0e2a63,
+    type: 2}
+  m_PrefabInternal: {fileID: 748162779}
+--- !u!114 &471703759
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 471703758}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1739c31a06a6c9b44a97412706d5f79b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Influence: 0
+  currentFollowers: 0
+  usedFollowers: 0
+  playerHealth: 0
+  ownedTemples: 0
+  Followers: []
 --- !u!1 &741794891
 GameObject:
   m_ObjectHideFlags: 0
@@ -223,7 +245,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1803528586168956, guid: 01e211d41ecc13c47a80c3371d0e2a63, type: 2}
       propertyPath: m_TagString
-      value: Untagged
+      value: GameController
       objectReference: {fileID: 0}
     - target: {fileID: 1464584611522556, guid: 01e211d41ecc13c47a80c3371d0e2a63, type: 2}
       propertyPath: m_TagString
@@ -293,7 +315,7 @@ Mesh:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: pb_Mesh-105832
+  m_Name: pb_Mesh11836
   serializedVersion: 8
   m_SubMeshes:
   - serializedVersion: 2

@@ -4,17 +4,41 @@ using UnityEngine;
 
 public class FollowerMoveScript : ActorMoveScript {
 
-    public float health, damage;
+    public bool following;
 
     protected override void Start()
     {
-        base.Start();
-        base.aggro_dist = 3.0f;
-        base.sleep_dist = 10.0f;
+        target = GameObject.FindWithTag("Player");
+        following = false;
+        aggro_dist = 3.0f;
+        sleep_dist = 10.0f;
     }
 
     protected override void Update()
     {
-        base.Update();
+        float dist = Vector3.Distance(target.transform.position,
+                                      transform.position);
+
+        if (dist < aggro_dist || following)
+        {
+            if (!following)
+            {
+                target.GetComponent<PlayerStats>().addFollower(this.gameObject);
+            }
+            following = true;
+            transform.LookAt(target.transform);
+            Vector3 forward = transform.forward;
+            transform.position += new Vector3(forward.x, 0, forward.z) * move_speed;
+        }
+
+        if (dist > sleep_dist && following)
+        {
+            if (following)
+            {
+                target.GetComponent<PlayerStats>().removeFollower(this.gameObject);
+            }
+            following = false;
+        }
     }
+
 }
