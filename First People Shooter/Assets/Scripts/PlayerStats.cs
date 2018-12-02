@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Stats : MonoBehaviour {
+public class PlayerStats : MonoBehaviour {
 
     public int Influence;
     public int currentFollowers;
@@ -21,9 +21,15 @@ public class Stats : MonoBehaviour {
         Influence = currentFollowers - usedFollowers;
     }
 
-    public void getFollower(GameObject follower)
+    public void addFollower(GameObject follower)
     {
         Followers.Add(follower);
         currentFollowers += 1;
+    }
+
+    public void removeFollower(GameObject follower)
+    {
+        Followers.Remove(follower);
+        currentFollowers -= 1;
     }
 }
