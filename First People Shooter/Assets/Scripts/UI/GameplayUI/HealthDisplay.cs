@@ -19,7 +19,7 @@ public class HealthDisplay : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        health = player.GetComponent<PlayerStats>().GetHealth();
+        health = player.GetComponent<PlayerStats>().getHealth();
         healthText.text = "Health : " + health;
 
         /*if (Input.GetKeyDown(KeyCode.Space))

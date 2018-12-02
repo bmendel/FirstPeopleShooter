@@ -4,13 +4,14 @@ using UnityEngine;
 
 public class PlayerStats : MonoBehaviour {
 
-    public int kills, usedFollowers;
+    public int kills, waveKills, usedFollowers;
     public int playerHealth;
     public List<GameObject> followers;
 
     // Use this for initialization
     void Start () {
         kills = 0;
+        waveKills = 0;
         usedFollowers = 0;
         playerHealth = 100;
 	}
@@ -20,7 +21,7 @@ public class PlayerStats : MonoBehaviour {
 
     }
 
-    public int GetHealth()
+    public int getHealth()
     {
         return playerHealth;
     }
@@ -30,9 +31,20 @@ public class PlayerStats : MonoBehaviour {
         return followers.Count;
     }
 
-    public int GetKillCount()
+    public void addKill()
+    {
+        kills++;
+        waveKills++;
+    }
+
+    public int getKillCount()
     {
         return kills;
+    }
+
+    public int getWaveKillCount()
+    {
+        return waveKills;
     }
 
     public void addFollower(GameObject follower)
@@ -59,5 +71,10 @@ public class PlayerStats : MonoBehaviour {
     public bool removeTenFollowers()
     {
         return false;
+    }
+
+    public void resetWaveKills()
+    {
+        waveKills = 0;
     }
 }
