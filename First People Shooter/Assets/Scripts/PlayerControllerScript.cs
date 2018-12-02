@@ -9,6 +9,7 @@ public class PlayerControllerScript : MonoBehaviour {
     public GameObject bullet;
     public Transform bulletSpawn;
     public float throwSpeed;
+    public bool paused;
 
 	// Use this for initialization
 	void Start () {
@@ -44,9 +45,21 @@ public class PlayerControllerScript : MonoBehaviour {
                                                 camera.transform.position.z);
 
         //Throw follower on Left Mouse Click
-        if(Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0))
         {
             Shoot();
+        }
+
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            if (!paused)
+            {
+                PauseGame();
+            }
+            else
+            {
+                ContinueGame();
+            }
         }
     }
 
@@ -58,5 +71,17 @@ public class PlayerControllerScript : MonoBehaviour {
             projectile.GetComponent<Rigidbody>().velocity = projectile.transform.forward * throwSpeed;
             Destroy(projectile, 2.0f);
         }
+    }
+
+    void PauseGame()
+    {
+        paused = true;
+        Time.timeScale = 0;
+    }
+
+    void ContinueGame()
+    {
+        paused = false;
+        Time.timeScale = 1;
     }
 }

@@ -35,12 +35,14 @@ public class EnemyMoveScript : ActorMoveScript {
         if (c.gameObject.tag == "Player")
         {
             target.GetComponent<PlayerStats>().playerHealth -= damage;
+            resting = true;
         }
 
         // If enemy hits a follower, the follower is destroyed
         if (c.gameObject.tag == "Follower")
         {
             c.gameObject.GetComponent<FollowerMoveScript>().destroyFollower();
+            resting = true;
         }
 
         // If enemy hits a bullet, the enemy is destroyed and the player gets some life
@@ -50,14 +52,17 @@ public class EnemyMoveScript : ActorMoveScript {
             {
                 target.GetComponent<PlayerStats>().playerHealth += 2;
             }
-            target.GetComponent<PlayerStats>().kills++;
+            target.GetComponent<PlayerStats>().addKill();
             Destroy(c.gameObject);
             Destroy(this.gameObject);
+            resting = true;
         }
 
         // After a hit, the enemy "rests" for a bit (doesn't move)
-        resting = true;
-        Invoke("WakeUp", 0.75f);
+        if (resting)
+        {
+            Invoke("WakeUp", 0.75f);
+        }
     }
 
     // Called to "wake up" an enemy resting after a collision
